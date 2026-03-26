@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PCEIA Insurance Quiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════════════════════════
+       START SCREEN
+       ════════════════════════════════════════════════════════════ -->
+  <div id="start-screen" class="screen">
+
+    <div class="start-header">
+      <div class="start-logo">📋</div>
+      <h1>PCEIA Insurance Quiz</h1>
+      <p class="subtitle">Pre-Contract Examination for Insurance Agents — Practice Questions</p>
+
+      <div class="stats-row">
+        <span class="stat-chip"><strong>87</strong> Questions</span>
+        <span class="stat-chip"><strong>12</strong> Chapters</span>
+        <span class="stat-chip"><strong>75%</strong> Pass Mark</span>
+        <span class="stat-chip highscore-chip">🏆 Best: <strong class="high-score-value">0%</strong></span>
+      </div>
+    </div>
+
+    <!-- Settings -->
+    <div class="settings-card">
+      <h3>⚙️ Settings</h3>
+
+      <div class="setting-row">
+        <label for="toggle-shuffle">
+          Shuffle Questions
+          <span class="setting-desc">Randomise the order of questions each attempt</span>
+        </label>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggle-shuffle">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="setting-row">
+        <label for="toggle-feedback">
+          Immediate Feedback
+          <span class="setting-desc">Show correct/wrong answer right after selection</span>
+        </label>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggle-feedback" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="setting-row">
+        <label for="toggle-timer">
+          Question Timer
+          <span class="setting-desc">Countdown timer per question</span>
+        </label>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggle-timer" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="setting-row" id="timer-row">
+        <label>Timer Duration</label>
+        <div class="range-wrap">
+          <input type="range" id="timer-duration" min="10" max="60" step="5" value="30">
+          <span class="range-label" id="timer-duration-display">30s</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category filter -->
+    <div class="settings-card">
+      <div class="cat-header">
+        <h3>📚 Select Chapters</h3>
+        <div class="cat-quick-btns">
+          <button class="btn-ghost" onclick="selectAll()">All</button>
+          <button class="btn-ghost" onclick="selectNone()">None</button>
+        </div>
+      </div>
+
+      <div id="category-list">
+        <!-- Populated by JS -->
+      </div>
+
+      <p class="selected-info"><span id="selected-count">87 questions selected</span></p>
+    </div>
+
+    <button class="btn-primary" id="btn-start">Start Quiz →</button>
+
+  </div><!-- /start-screen -->
+
+
+  <!-- ════════════════════════════════════════════════════════════
+       QUIZ SCREEN
+       ════════════════════════════════════════════════════════════ -->
+  <div id="quiz-screen" class="screen">
+
+    <!-- Header: progress + timer -->
+    <div class="quiz-header">
+      <div class="progress-wrap">
+        <div class="progress-meta">
+          <span id="progress-text">Question 1 of 87</span>
+          <span id="live-score">Score: 0</span>
+        </div>
+        <div class="progress-track">
+          <div id="progress-bar" style="width:0%"></div>
+        </div>
+      </div>
+
+      <div class="timer-wrap">
+        <div class="timer-circle">
+          <svg viewBox="0 0 64 64">
+            <circle class="timer-track"  cx="32" cy="32" r="28"/>
+            <circle class="progress-ring" cx="32" cy="32" r="28"
+                    stroke-dasharray="175.93"
+                    stroke-dashoffset="0"/>
+          </svg>
+          <span class="timer-display" id="timer-display">30</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Question + options card -->
+    <div id="question-card">
+      <span id="chapter-badge">Chapter</span>
+      <p  id="question-text">Question text here</p>
+      <div id="options-container">
+        <!-- Options populated by JS -->
+      </div>
+    </div>
+
+    <!-- Footer: next button + keyboard hint -->
+    <div class="quiz-footer">
+      <button id="btn-next" disabled>Next Question →</button>
+    </div>
+    <p class="keyboard-hint">Keyboard: 1–4 or A–D to select &nbsp;·&nbsp; Enter to advance</p>
+
+  </div><!-- /quiz-screen -->
+
+
+  <!-- ════════════════════════════════════════════════════════════
+       RESULTS SCREEN
+       ════════════════════════════════════════════════════════════ -->
+  <div id="results-screen" class="screen">
+
+    <div class="results-header">
+      <h2>Quiz Complete 🎉</h2>
+      <p>Here's how you did:</p>
+    </div>
+
+    <!-- Score ring -->
+    <div class="score-ring-wrap">
+      <div class="results-ring">
+        <svg viewBox="0 0 180 180">
+          <circle class="ring-track" cx="90" cy="90" r="70"/>
+          <circle class="score-arc"  cx="90" cy="90" r="70"
+                  stroke-dasharray="439.82"
+                  stroke-dashoffset="439.82"/>
+        </svg>
+        <div class="score-inner">
+          <span id="result-percentage">0%</span>
+          <span id="result-score-text">0 / 0</span>
+          <span id="pass-fail-badge" class="pass-fail-badge pass">PASS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats grid -->
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="val green" id="result-correct">0</div>
+        <div class="lbl">Correct</div>
+      </div>
+      <div class="stat-box">
+        <div class="val red"  id="result-wrong">0</div>
+        <div class="lbl">Wrong</div>
+      </div>
+      <div class="stat-box">
+        <div class="val blue" id="result-total">0</div>
+        <div class="lbl">Total</div>
+      </div>
+    </div>
+
+    <!-- Best score -->
+    <div class="stats-row" style="justify-content:center;margin-bottom:20px;">
+      <span class="stat-chip highscore-chip">🏆 Personal Best: <strong class="high-score-value">0%</strong></span>
+    </div>
+
+    <!-- Category breakdown -->
+    <div class="breakdown-card">
+      <h3>📊 Results by Chapter</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Chapter</th>
+            <th>Score</th>
+            <th>%</th>
+            <th style="min-width:80px">Bar</th>
+          </tr>
+        </thead>
+        <tbody id="breakdown-body">
+          <!-- populated by JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="results-actions">
+      <button class="btn-outline"     id="btn-review">  📖 Review Answers</button>
+      <button class="btn-primary-sm"  id="btn-restart"> 🔄 Restart Quiz</button>
+    </div>
+    <p class="passing-note">Pass mark: 75% · Results stored locally in your browser</p>
+
+  </div><!-- /results-screen -->
+
+
+  <!-- ════════════════════════════════════════════════════════════
+       REVIEW SCREEN
+       ════════════════════════════════════════════════════════════ -->
+  <div id="review-screen" class="screen">
+
+    <div class="review-nav">
+      <button id="btn-review-back">← Back to Results</button>
+      <span   id="review-progress">1 / 87</span>
+      <div class="review-nav-btns">
+        <button class="btn-nav" id="btn-review-prev">‹ Prev</button>
+        <button class="btn-nav" id="btn-review-next">Next ›</button>
+      </div>
+    </div>
+
+    <div id="review-card">
+      <div class="review-meta">
+        <span id="review-chapter-badge">Chapter</span>
+        <span id="review-status" class="review-status correct">✓ Correct</span>
+      </div>
+      <p id="review-question">Question text here</p>
+      <div id="review-options">
+        <!-- populated by JS -->
+      </div>
+    </div>
+
+    <p class="review-keyboard-hint">Keyboard: ← → arrow keys to navigate</p>
+
+  </div><!-- /review-screen -->
+
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
