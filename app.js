@@ -13,7 +13,8 @@ let state = {
   questions:       [],   // active question pool (filtered + possibly shuffled)
   current:         0,    // current question index
   selectedOption:  null, // index of currently selected option (null = none)
-  answers:         [],   // array of { questionId, selected, correct, timeLeft }
+  answerMap:       {},   // { [questionIndex]: { questionId, chapter, selected, correct, isRight, timeLeft } }
+  answers:         [],   // built from answerMap when showing results/review
   score:           0,
   timerInterval:   null,
   timeLeft:        30,
@@ -190,6 +191,7 @@ function startQuiz() {
   state.questions      = pool;
   state.current        = 0;
   state.score          = 0;
+  state.answerMap      = {};
   state.answers        = [];
   state.selectedOption = null;
   state.answered       = false;
@@ -232,15 +234,34 @@ function renderQuestion() {
     container.appendChild(btn);
   });
 
-  // Next button
-  $('btn-next').disabled   = true;
-  $('btn-next').textContent = (state.current === total - 1) ? 'Finish Quiz' : 'Next Question →';
-  state.selectedOption = null;
-  state.answered       = false;
+  // Restore state if this question was already answered
+  const existingAnswer = state.answerMap[state.current];
+  if (existingAnswer !== undefined) {
+    // Show in read-only answered state
+    state.selectedOption = existingAnswer.selected;
+    state.answered       = true;
+    stopTimer();
+    document.querySelectorAll('.option-btn').forEach((btn, i) => {
+      btn.disabled = true;
+      if (i === q.correct)                                      btn.classList.add('correct');
+      if (i === existingAnswer.selected && !existingAnswer.isRight) btn.classList.add('wrong');
+      if (i === existingAnswer.selected)                        btn.classList.add('selected');
+    });
+    $('btn-next').disabled = false;
+  } else {
+    // Fresh unanswered question
+    state.selectedOption = null;
+    state.answered       = false;
+    $('btn-next').disabled = true;
+    resetTimer();
+    if (state.settings.timerEnabled) startTimer();
+  }
 
-  // Timer
-  resetTimer();
-  if (state.settings.timerEnabled) startTimer();
+  // Next / Finish label
+  $('btn-next').textContent = (state.current === total - 1) ? 'Finish Quiz' : 'Next Question →';
+
+  // Prev button — enabled once past Q1
+  $('btn-prev').disabled = (state.current === 0);
 
   // Animate in
   $('question-card').classList.remove('slide-in');
@@ -280,15 +301,15 @@ function submitAnswer() {
 
   if (isRight) state.score++;
 
-  // Record
-  state.answers.push({
+  // Record answer keyed by question index (enables back-navigation)
+  state.answerMap[state.current] = {
     questionId: q.id,
     chapter:    q.chapter,
     selected:   chosen,
     correct:    q.correct,
     isRight,
     timeLeft:   state.timeLeft
-  });
+  };
 
   // Highlight options
   document.querySelectorAll('.option-btn').forEach((btn, i) => {
@@ -308,15 +329,42 @@ function submitAnswer() {
 // Next question / finish
 // ─────────────────────────────────────────────────────────────────────────────
 function nextQuestion() {
-  // If feedback is OFF, we need to submit before advancing
-  if (!state.answered) {
-    if (state.selectedOption === null) return; // shouldn't happen (button disabled)
-    submitAnswer();
-    // Brief pause to show feedback, then advance
-    setTimeout(advance, 600);
+  // Already answered (fresh submit or revisiting a previous question) → just move forward
+  if (state.answered) {
+    advance();
     return;
   }
-  advance();
+  // Unanswered — need to submit first
+  if (state.selectedOption === null) return;
+  submitAnswer();
+  if (state.settings.feedback) {
+    // Feedback was shown instantly on selection; advance immediately
+    advance();
+  } else {
+    // Brief pause so user sees the correct/wrong highlight before moving on
+    setTimeout(advance, 600);
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Previous question
+// ─────────────────────────────────────────────────────────────────────────────
+function prevQuestion() {
+  if (state.current === 0) return;
+  stopTimer();
+  state.current--;
+  renderQuestion();
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Exit quiz → return to home
+// ─────────────────────────────────────────────────────────────────────────────
+function exitQuiz() {
+  if (confirm('Exit quiz? Your current progress will be lost.')) {
+    stopTimer();
+    showScreen('start-screen');
+    renderHighScore();
+  }
 }
 
 function advance() {
@@ -397,9 +445,14 @@ function showResults() {
   stopTimer();
   showScreen('results-screen');
 
+  // Build ordered answers array from answerMap for review screen
+  state.answers = Object.entries(state.answerMap)
+    .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
+    .map(([, v]) => v);
+
   const total   = state.questions.length;
-  const correct = state.score;
-  const wrong   = total - correct;
+  const correct = Object.values(state.answerMap).filter(a => a.isRight).length;
+  const wrong   = Object.keys(state.answerMap).length - correct;
   const pct     = Math.round((correct / total) * 100);
   const passed  = pct >= PASS_THRESHOLD * 100;
 
@@ -459,9 +512,9 @@ function renderCategoryBreakdown() {
   const tbody = $('breakdown-body');
   tbody.innerHTML = '';
 
-  // Gather stats per chapter
+  // Gather stats per chapter from answerMap
   const chapterMap = {};
-  state.answers.forEach(a => {
+  Object.values(state.answerMap).forEach(a => {
     if (!chapterMap[a.chapter]) chapterMap[a.chapter] = { correct: 0, total: 0 };
     chapterMap[a.chapter].total++;
     if (a.isRight) chapterMap[a.chapter].correct++;
@@ -571,8 +624,9 @@ function showScreen(id) {
 // Wire up quiz screen button (must happen after DOM loaded)
 // ─────────────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  // Next button
   $('btn-next').addEventListener('click', nextQuestion);
+  $('btn-prev').addEventListener('click', prevQuestion);
+  $('btn-exit').addEventListener('click', exitQuiz);
 
   // Keyboard support
   document.addEventListener('keydown', e => {
@@ -586,6 +640,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if ((e.key === 'Enter' || e.key === 'ArrowRight') && !$('btn-next').disabled) {
         nextQuestion();
+      }
+      if ((e.key === 'Backspace' || e.key === 'ArrowLeft') && !$('btn-prev').disabled) {
+        prevQuestion();
       }
     }
     if (screenActive.id === 'review-screen') {

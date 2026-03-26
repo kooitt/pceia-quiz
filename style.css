@@ -352,6 +352,31 @@ input  { font-family: inherit; }
   flex-wrap:   wrap;
 }
 
+.quiz-header-right {
+  display:     flex;
+  align-items: center;
+  gap:         10px;
+  flex-shrink: 0;
+}
+
+/* Exit button */
+.btn-exit {
+  background:    rgba(239,68,68,0.1);
+  border:        1.5px solid rgba(239,68,68,0.35);
+  color:         #f87171;
+  border-radius: 8px;
+  padding:       8px 14px;
+  font-size:     0.82rem;
+  font-weight:   700;
+  transition:    var(--trans);
+  white-space:   nowrap;
+}
+.btn-exit:hover {
+  background:   rgba(239,68,68,0.2);
+  border-color: var(--danger);
+  color:        #fff;
+}
+
 .progress-wrap { flex: 1; min-width: 200px; }
 
 .progress-meta {
@@ -533,11 +558,34 @@ input  { font-family: inherit; }
 
 .option-btn:disabled { cursor: not-allowed; }
 
-/* Next button */
+/* Footer: prev + next */
 .quiz-footer {
-  display:     flex;
-  justify-content: flex-end;
-  margin-top:  8px;
+  display:         flex;
+  justify-content: space-between;
+  align-items:     center;
+  gap:             10px;
+  margin-top:      8px;
+}
+
+/* Previous button */
+.btn-prev {
+  background:    transparent;
+  border:        1.5px solid var(--border);
+  color:         var(--muted);
+  border-radius: 10px;
+  padding:       13px 22px;
+  font-size:     0.92rem;
+  font-weight:   600;
+  transition:    var(--trans);
+}
+.btn-prev:hover:not(:disabled) {
+  border-color: var(--primary);
+  color:        var(--primary);
+  background:   rgba(59,130,246,0.06);
+}
+.btn-prev:disabled {
+  opacity:    0.25;
+  cursor:     not-allowed;
 }
 
 #btn-next {
@@ -981,8 +1029,9 @@ input  { font-family: inherit; }
   .results-actions  { flex-direction: column; }
   .btn-outline, .btn-primary-sm { flex: unset; width: 100%; }
   .breakdown-card .cat-name { max-width: 130px; font-size: 0.72rem; }
-  #btn-next         { width: 100%; }
-  .quiz-footer      { justify-content: stretch; }
+  .quiz-footer      { flex-wrap: wrap; }
+  #btn-next         { flex: 1; }
+  .btn-prev         { flex: 1; }
   .timer-circle     { width: 56px; height: 56px; }
   .timer-circle svg { width: 56px; height: 56px; }
   .timer-display    { font-size: 0.9rem; }

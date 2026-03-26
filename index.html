@@ -102,7 +102,7 @@
        ════════════════════════════════════════════════════════════ -->
   <div id="quiz-screen" class="screen">
 
-    <!-- Header: progress + timer -->
+    <!-- Header: progress + timer + exit -->
     <div class="quiz-header">
       <div class="progress-wrap">
         <div class="progress-meta">
@@ -114,16 +114,19 @@
         </div>
       </div>
 
-      <div class="timer-wrap">
-        <div class="timer-circle">
-          <svg viewBox="0 0 64 64">
-            <circle class="timer-track"  cx="32" cy="32" r="28"/>
-            <circle class="progress-ring" cx="32" cy="32" r="28"
-                    stroke-dasharray="175.93"
-                    stroke-dashoffset="0"/>
-          </svg>
-          <span class="timer-display" id="timer-display">30</span>
+      <div class="quiz-header-right">
+        <div class="timer-wrap">
+          <div class="timer-circle">
+            <svg viewBox="0 0 64 64">
+              <circle class="timer-track"  cx="32" cy="32" r="28"/>
+              <circle class="progress-ring" cx="32" cy="32" r="28"
+                      stroke-dasharray="175.93"
+                      stroke-dashoffset="0"/>
+            </svg>
+            <span class="timer-display" id="timer-display">30</span>
+          </div>
         </div>
+        <button id="btn-exit" class="btn-exit" title="Exit quiz and return to home">✕ Exit</button>
       </div>
     </div>
 
@@ -136,11 +139,12 @@
       </div>
     </div>
 
-    <!-- Footer: next button + keyboard hint -->
+    <!-- Footer: prev + next buttons -->
     <div class="quiz-footer">
+      <button id="btn-prev" class="btn-prev" disabled>← Previous</button>
       <button id="btn-next" disabled>Next Question →</button>
     </div>
-    <p class="keyboard-hint">Keyboard: 1–4 or A–D to select &nbsp;·&nbsp; Enter to advance</p>
+    <p class="keyboard-hint">Keys: 1–4 / A–D select &nbsp;·&nbsp; Enter next &nbsp;·&nbsp; Backspace previous</p>
 
   </div><!-- /quiz-screen -->
 
