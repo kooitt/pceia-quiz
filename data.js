@@ -1,22 +1,32 @@
 // =============================================================================
-// PCEIA QUIZ DATA — 87 Questions across 12 Chapters
+// QUIZ DATA — PCEIA (87 Q) + CEILLI (82 Q) = 169 Questions
 // Correct answer index: 0=A, 1=B, 2=C, 3=D
-// Source: PCEIA Q&A (Perspectives on Insurance & Risk Management textbook)
 // =============================================================================
 
 const CATEGORIES = [
-  { id: 1,  label: "Ch.1 · Perspectives on Insurance & Risk Management" },
-  { id: 2,  label: "Ch.2 · Fundamental Principles of Insurance" },
-  { id: 3,  label: "Ch.3 · Legislation and Consumer Protection" },
-  { id: 4,  label: "Ch.4 · The Insurance Contract" },
-  { id: 5,  label: "Ch.5 · Law of Agency" },
-  { id: 6,  label: "Ch.6 · Medical & Health Insurance / Takaful (MHIT)" },
-  { id: 11, label: "Ch.11 · Legal Provisions — Life Insurance Policies" },
-  { id: 12, label: "Ch.12 · Life Insurance Products" },
-  { id: 13, label: "Ch.13 · Life Insurance Premium Rating" },
-  { id: 14, label: "Ch.14 · Life Insurance Underwriting and Documents" },
-  { id: 15, label: "Ch.15 · Life Insurance Claims" },
-  { id: 16, label: "Ch.16 · Code of Practice for Life Insurance Agents" },
+  // ── PCEIA ──────────────────────────────────────────────────────────────────
+  { id: 1,  source: 'pceia', label: "Ch.1 · Perspectives on Insurance & Risk Management" },
+  { id: 2,  source: 'pceia', label: "Ch.2 · Fundamental Principles of Insurance" },
+  { id: 3,  source: 'pceia', label: "Ch.3 · Legislation and Consumer Protection" },
+  { id: 4,  source: 'pceia', label: "Ch.4 · The Insurance Contract" },
+  { id: 5,  source: 'pceia', label: "Ch.5 · Law of Agency" },
+  { id: 6,  source: 'pceia', label: "Ch.6 · Medical & Health Insurance / Takaful (MHIT)" },
+  { id: 11, source: 'pceia', label: "Ch.11 · Legal Provisions — Life Insurance Policies" },
+  { id: 12, source: 'pceia', label: "Ch.12 · Life Insurance Products" },
+  { id: 13, source: 'pceia', label: "Ch.13 · Life Insurance Premium Rating" },
+  { id: 14, source: 'pceia', label: "Ch.14 · Life Insurance Underwriting and Documents" },
+  { id: 15, source: 'pceia', label: "Ch.15 · Life Insurance Claims" },
+  { id: 16, source: 'pceia', label: "Ch.16 · Code of Practice for Life Insurance Agents" },
+  // ── CEILLI ─────────────────────────────────────────────────────────────────
+  { id: 101, source: 'ceilli', label: "CEILLI Ch.1 · Introduction to Investment-Linked Insurance" },
+  { id: 102, source: 'ceilli', label: "CEILLI Ch.2 · Mechanisms & Features of Regular Premium ILP" },
+  { id: 103, source: 'ceilli', label: "CEILLI Ch.3 · Disclosure Requirement" },
+  { id: 104, source: 'ceilli', label: "CEILLI Ch.4 · Mechanisms & Features of Single Premium ILP" },
+  { id: 105, source: 'ceilli', label: "CEILLI Ch.5 · Considerations for Purchasing ILP" },
+  { id: 106, source: 'ceilli', label: "CEILLI Ch.6 · Investment Considerations" },
+  { id: 107, source: 'ceilli', label: "CEILLI Ch.7 · Investment Vehicles & Potential Risks" },
+  { id: 108, source: 'ceilli', label: "CEILLI Ch.8 · Common Types of ILFs & Fund Management" },
+  { id: 109, source: 'ceilli', label: "CEILLI Ch.9 · Pertinent Guidelines on ILP Business" },
 ];
 
 const quizData = [
@@ -1036,6 +1046,741 @@ const quizData = [
       "The number of insurance policies the agent owns."
     ],
     correct: 2
+  },
+
+  // ===========================================================================
+  // CEILLI — Certificate Examination in Investment-Linked Life Insurance
+  // 82 Questions across 9 Chapters  (IDs 88–169, chapter IDs 101–109)
+  // ===========================================================================
+
+  // CHAPTER 101 — Introduction to Investment-Linked Life Insurance (5 Q)
+  {
+    id: 88, chapter: 101,
+    question: "What are the factors that have contributed to the popularity of investment-linked insurance in Malaysia?<br><br>I. Young individuals who are just starting to explore insurance options<br>II. Consumers prefer traditional insurance products for stable coverage<br>III. Flexibility in terms of investment options<br>IV. Potential higher returns than traditional insurance policies",
+    options: ["I and II", "II and III", "III and IV", "I and IV"],
+    correct: 2
+  },
+  {
+    id: 89, chapter: 101,
+    question: "Which of the following is the correct description of an investment-linked life policy?",
+    options: [
+      "A participating policy offering lifetime coverage",
+      "A capital guaranteed policy",
+      "An endowment policy which provides minimum returns",
+      "A policy offering protection and investment opportunities"
+    ],
+    correct: 3
+  },
+  {
+    id: 90, chapter: 101,
+    question: "An investment-linked life insurance is also known as the following in some parts of the world?<br><br>I. Mutual fund-linked insurance<br>II. Unit-linked life insurance<br>III. Variable life insurance<br>IV. Universal life insurance",
+    options: ["I, II, III and IV", "I, II and III", "II, III and IV", "II and III"],
+    correct: 3
+  },
+  {
+    id: 91, chapter: 101,
+    question: "Investment-linked funds are managed by:<br><br>I. The insurer's own professional manager in its internal investment department<br>II. Fund managers/fund houses appointed by the insurer through outsourcing<br>III. Outsourcing to the funds of unit trust companies since investment-linked funds are similar to unit trust funds<br>IV. The insurer's board of directors who can make special decisions on the types of investment vehicles to offer to policy owners",
+    options: ["I and II", "II and III", "II and IV", "All the above"],
+    correct: 0
+  },
+  {
+    id: 92, chapter: 101,
+    question: "What are the key advantages of Investment-Linked Products (ILP) for consumers?<br><br>I. ILP provides life insurance coverage<br>II. ILP offers investment opportunities with flexibility of investment funds selection<br>III. ILP can be customised to suit the policyholder's individual needs, level of coverage and investment funds options<br>IV. ILP can also be used as a tool for estate planning; investment value can be passed down to beneficiaries tax-free in the event of the policyholder's death",
+    options: ["I and II", "II and III", "III and IV", "All the above"],
+    correct: 3
+  },
+
+  // CHAPTER 102 — Mechanisms & Features of Regular Premium ILP (10 Q)
+  {
+    id: 93, chapter: 102,
+    question: "Which of the following statements correctly describes single-premium investment-linked policies (ILPs) as compared to regular premium ILPs?",
+    options: [
+      "Single-premium ILPs require the policyholder to make regular, ongoing premium payments.",
+      "Single-premium ILPs generally allocate a higher proportion of funds to insurance protection than regular premium ILPs.",
+      "Single-premium ILPs involve a one-time lump sum payment and typically offer a higher proportion of funds for investment.",
+      "Single-premium ILPs allow policyholders to adjust their insurance coverage level as their financial needs change over time."
+    ],
+    correct: 2
+  },
+  {
+    id: 94, chapter: 102,
+    question: "Which of the following statements correctly describes the dual pricing method for investment-linked policies in Malaysia?",
+    options: [
+      "Dual pricing uses a single calculated price but applies different transaction fees for buying and selling units.",
+      "Dual pricing involves two separate prices for each unit: a bid price for buying back units and an offer price for selling units, typically with a 5% difference.",
+      "Dual pricing allows insurers to calculate unit prices based on the Net Asset Value (NAV) but includes an additional cost for each transaction.",
+      "Dual pricing was adopted by the insurance industry in Malaysia starting in 2006 to enhance transparency."
+    ],
+    correct: 1
+  },
+  {
+    id: 95, chapter: 102,
+    question: "A 30-year-old female has budgeted RM3,000 per year for a basic regular premium investment-linked plan, which includes a Unit-Deducting Hospitalisation Rider. Based on the SAM rule, how would you calculate the minimum sum assured required for her basic plan?",
+    options: [
+      "(RM3,000 - Notional Premium for Rider) × 50",
+      "(RM3,000 + Notional Premium for Rider) × 50",
+      "(RM3,000 - Notional Premium for Rider) × 60",
+      "(RM3,000 + Notional Premium for Rider) × 60"
+    ],
+    correct: 0
+  },
+  {
+    id: 96, chapter: 102,
+    question: "In an investment-linked policy, what is the main purpose of the allocated premium?",
+    options: [
+      "To cover the insurer's administrative and management costs",
+      "To pay commissions to agents and other distribution costs",
+      "To guarantee a minimum return on investment for the policyholder",
+      "To buy units in the investment funds selected by the policyholder"
+    ],
+    correct: 3
+  },
+  {
+    id: 97, chapter: 102,
+    question: "If a policyholder cancels an investment-linked policy during the free-look period, what will they typically receive as a refund?",
+    options: [
+      "The full premium paid, with no deductions",
+      "The policy account value at the next valuation date, with no additional refunds",
+      "The full premium paid, subject to a deduction for any expenses incurred for medical examinations",
+      "Only the allocated premium amount, with the unallocated premium retained by the insurer"
+    ],
+    correct: 2
+  },
+  {
+    id: 98, chapter: 102,
+    question: "What is a key advantage of using Dollar Cost Averaging (DCA) in an investment-linked policy?",
+    options: [
+      "It minimises the need for further premium payments in the future",
+      "It guarantees a profit over the investment period by buying at low prices",
+      "It ensures a fixed rate of return regardless of market conditions",
+      "It helps reduce the impact of market volatility by spreading investments over time"
+    ],
+    correct: 3
+  },
+  {
+    id: 99, chapter: 102,
+    question: "Based on the general conditions for the design of investment-linked products, which of the following statements are correct?<br><br>I. The name and design of an investment-linked product must clearly indicate it is an investment-linked product<br>II. Capital-guaranteed products must be backed by a licensed bank, investment bank, or Islamic bank<br>III. Investment-linked products must provide options and guarantees that ensure minimum returns<br>IV. Riders can be added to the policy and may involve unit deductions or require separate premium payments",
+    options: ["I and II only", "I, II, and IV only", "II, III, and IV only", "I, III, and IV only"],
+    correct: 1
+  },
+  {
+    id: 100, chapter: 102,
+    question: "Which statements below describe 'spread-out risk among varied assets' correctly?<br><br>I. Money is invested in a variety of different assets, such as stocks, bonds, and other securities, which helps to reduce the overall risk of your investment.<br>II. As long as the assets selected by the fund manager are sound and the fund manager exercises prudence, the fund price will definitely appreciate in the long run despite fluctuations.<br>III. Spreading investment across different assets helps to diversify an investor's portfolio and reduce the exposure to any one asset class.<br>IV. Spreading out risk among varied assets can help to minimise the impact of market volatility on the investment.",
+    options: ["I and II", "I, II and III", "I, III and IV", "II, III and IV"],
+    correct: 3
+  },
+  {
+    id: 101, chapter: 102,
+    question: "Which of the following statement(s) regarding Minimum Allocation Rate (MAR) are correct?<br><br>I. MAR is the average proportion of premiums payable by policy owner that is allocated in the unit fund(s) of choice before the deduction of any charges.<br>II. MAR is the minimum proportion of premiums payable by policy owner that is allocated in the unit fund(s) of choice before the deduction of any charges.<br>III. The prevailing MAR prescribed by Bank Negara Malaysia for Year 1 to Year 3 premium payment is 60%.<br>IV. The prevailing MAR prescribed by Bank Negara Malaysia for Year 7 to Year 10 premium payment is 100%.",
+    options: ["I and II", "II and III", "I, III and IV", "II and IV"],
+    correct: 1
+  },
+  {
+    id: 102, chapter: 102,
+    question: "Which of the following statement(s) regarding Fund Management Charge (FMC) are correct?<br><br>I. FMC is remuneration to insurers for managing the investment-linked funds for policy owners.<br>II. FMC is being charged to the fund using the unit single pricing method only.<br>III. FMC commensurates with the investment strategy used and cannot exceed 1% of NAV for money-market/fixed income funds, or 1.5% of NAV for other funds.<br>IV. Single pricing approach ensures that the same price applies to both buying and selling units of a given ILP fund.",
+    options: ["I and II", "I, II and III", "II, III and IV", "I, III and IV"],
+    correct: 3
+  },
+
+  // CHAPTER 103 — Disclosure Requirement (10 Q)
+  {
+    id: 103, chapter: 103,
+    question: "What is the essential knowledge about Product Illustration that agents should know?<br><br>I. It is an educational tool that shows a prospective policyholder the essential information of an insurance product, including product name, term, features, benefits, premium, cash value, projected returns and product disclosure sheet.<br>II. Agents must refer to the insurer's approved product illustration for investment-linked products and explain to potential policyholders at the point of sales.<br>III. Product illustration is meant to illustrate the possible movements of cash flows of the investment-linked policy and the impact of fees and charges on cash values.<br>IV. A copy of the product illustration need not be included in the policy document.",
+    options: ["I and II", "II and III", "I, II and III", "II, III and IV"],
+    correct: 2
+  },
+  {
+    id: 104, chapter: 103,
+    question: "What do the Scenario X and Scenario Y rates for non-equity funds represent in a product illustration?",
+    options: [
+      "Represent the hypothetical rate of returns at 2% (X for low scenario) and 5% (Y for high scenario) for policy owners on the potential impact of different hypothetical investments on their account values",
+      "Represent the best scenario to illustrate the rate of returns for all funds",
+      "2% (X for low scenario) and 5% (Y for high scenario) for all funds",
+      "Represent the 2 projected rate of returns for the fixed income funds"
+    ],
+    correct: 0
+  },
+  {
+    id: 105, chapter: 103,
+    question: "Which statements correctly describe product literature provided by insurers?<br><br>I. It is additional material to product illustration and Fund Fact Sheet to enhance information to potential clients.<br>II. It includes announcements, promotional materials, advertisements, and sales/marketing brochures provided before or at point of sales.<br>III. It is to be provided by the agents to prospective policyholders before or at point of sales.<br>IV. Agents may refer to their own designed product brochures to explain to prospective policyholders during point of sales.",
+    options: ["I and II", "II and III", "III and IV", "I, II and III"],
+    correct: 3
+  },
+  {
+    id: 106, chapter: 103,
+    question: "What are the agent's duties in relation to the fund performance report for policy owners?<br><br>I. Inform policy owners that they will receive the fund performance report at least once a year.<br>II. Assist policy owners in understanding the essential information in the fund performance report.<br>III. Address any questions or concerns that policy owners may have regarding the fund performance report.<br>IV. Help policy owners make informed decisions based on the information provided in the fund performance report.",
+    options: ["All of the above", "I, II and III", "II, III and IV", "I, III and IV"],
+    correct: 0
+  },
+  {
+    id: 107, chapter: 103,
+    question: "What is a fund fact sheet?",
+    options: [
+      "It is an annual statement from the insurer to its policy owners on the status of their investment-linked policy, showing all transactions or charges during the period.",
+      "It is an overview of a fund including the fund's investment objective, risk level, costs, past performance, and holdings details.",
+      "It is a fund performance report which is required to be sent to the policyholder annually.",
+      "It is an analysis of the fund performance and report on the changes in the investment objectives, strategies, restrictions, and limitations of the fund during the year."
+    ],
+    correct: 1
+  },
+  {
+    id: 108, chapter: 103,
+    question: "As an agent, your duties related to the publication of unit price include:<br><br>I. Inform policy owners on the availability of daily publication of the latest NAV per unit of each investment-linked fund on the insurer's official website.<br>II. Assist policy owners in accessing the latest NAV per unit and guide them on how to use alternative methods (such as telephone hotlines) if they do not have internet access.<br>III. Help policy owners to access historical data of the NAV per unit for each investment-linked fund upon request.<br>IV. Recommend prospective policyholders to decide when to switch funds.",
+    options: ["II and III", "I, II and III", "III and IV", "I and IV"],
+    correct: 1
+  },
+  {
+    id: 109, chapter: 103,
+    question: "Which statement best describes Investment-Linked Products with extension to coverage term feature?",
+    options: [
+      "It refers to Investment-Linked Plans which will be automatically extended at the end of the initial coverage period, recurring usually every 5 or 10 years until age 100 without going through underwriting.",
+      "It refers to Investment-Linked Plans which will be automatically extended in the middle of the initial coverage period, recurring usually every 5 or 10 years until age 100 without going through underwriting.",
+      "It refers to Investment-Linked Plans which will be automatically extended at the end of the initial coverage period, recurring usually every 5 or 10 years until age 100 subject to underwriting.",
+      "It refers to Investment-Linked Plans which will be automatically extended at the end of the initial coverage period, recurring usually every 5 or 10 years until age 100 subject to only medical underwriting."
+    ],
+    correct: 0
+  },
+  {
+    id: 110, chapter: 103,
+    question: "What are some of the key point-of-sale and post-sale disclosure requirements (mainly for insurers) for investment-linked products with extension to coverage term feature?<br><br>I. Explain features clearly in plain language and disclose limits that may impact the extension length.<br>II. Ensure that all disclosures to policy owners are clear, not misleading, and highlight limitations and potential variations.<br>III. Disclose features and mechanics of coverage extension, distinctions between initial and extended terms, premium required to fund the extension, procedures for exercising the option, and re-underwriting requirements.<br>IV. Disclose the amount needed for both the initial and extended periods, depending on whether pre-funding of the extension is in place or not.",
+    options: ["I and II", "II and III", "II, III and IV", "I, II, III and IV"],
+    correct: 3
+  },
+  {
+    id: 111, chapter: 103,
+    question: "Choose the following statements which are TRUE.<br><br>I. Product Literature — Agents are to communicate clearly to prospective policyholders that the investment-linked product is an insurance/takaful product tied to the performance of underlying assets, rather than a pure investment product like unit trusts.<br>II. Fund Fact Sheet — Agents are responsible to provide clients a Fund Fact Sheet for each of the investment-linked funds offered by insurers together with product illustration at the point of sales.<br>III. Product Illustration — Agents are to provide a copy of the product illustration, based on the actual premium rates subscribed, to the policy owners together with the investment-linked product policy document.<br>IV. Product Literature — Agents are to present the insurer's approved product literature which aligns with the product illustration and Fund Fact Sheet to prospective policyholders.",
+    options: ["I and II", "II and III", "II, III and IV", "I, II, III and IV"],
+    correct: 3
+  },
+  {
+    id: 112, chapter: 103,
+    question: "What are some of the key disclosure requirements that agents need to understand and adhere to when promoting investment-linked products to clients?<br><br>I. Provide accurate and transparent information.<br>II. Offer reasonable and verifiable opinions.<br>III. Present factual performance statements and avoid undue expectations.<br>IV. Clearly communicate guarantees and disclose third-party guarantee information.",
+    options: ["II, III and IV", "I, II and III", "All of the above", "I, III and IV"],
+    correct: 2
+  },
+
+  // CHAPTER 104 — Mechanisms & Features of Single Premium ILP (10 Q)
+  {
+    id: 113, chapter: 104,
+    question: "In single premium investment-linked (SP-IL) life insurance, how are premium payments made?",
+    options: [
+      "Periodic payments throughout the policy term",
+      "One-time lump sum payment upfront",
+      "Payments spread over the first 10 years",
+      "No premium payments required"
+    ],
+    correct: 1
+  },
+  {
+    id: 114, chapter: 104,
+    question: "What is the primary objective for policy owners of regular premium investment-linked (RP-IL) policies?",
+    options: [
+      "Maximize investment returns",
+      "Obtain life insurance coverage",
+      "Secure financial protection for dependents",
+      "Accumulate wealth over time"
+    ],
+    correct: 2
+  },
+  {
+    id: 115, chapter: 104,
+    question: "What is the minimum basic single premium (SP) for SP-IL life insurance policies typically based on?",
+    options: [
+      "The policyholder's age and health status",
+      "The target market of the insurance company",
+      "The performance of the chosen investment funds",
+      "The discretion of individual insurers"
+    ],
+    correct: 3
+  },
+  {
+    id: 116, chapter: 104,
+    question: "Which component of SP-IL policies is a one-time payment and typically should not exceed 5%?",
+    options: [
+      "Sum assured",
+      "Upfront charge",
+      "Cost of insurance deduction",
+      "Minimum protection amount"
+    ],
+    correct: 1
+  },
+  {
+    id: 117, chapter: 104,
+    question: "What does the basic sum assured (BSA) represent in SP-IL policies?",
+    options: [
+      "The current value of investment units",
+      "The minimum protection amounts",
+      "The total premium paid",
+      "The sum of allocated and unallocated premiums"
+    ],
+    correct: 1
+  },
+  {
+    id: 118, chapter: 104,
+    question: "The upfront charge for a single premium investment-linked (SP-IL) policy is 4% of the single premium paid. If the single premium is RM15,000, what is the amount of the upfront charge?",
+    options: ["RM600", "RM1,500", "RM4,000", "RM5,000"],
+    correct: 0
+  },
+  {
+    id: 119, chapter: 104,
+    question: "What is the purpose of the cost of insurance (COI) deduction in SP-IL policies?",
+    options: [
+      "To cover the investment management fees",
+      "To increase the sum assured over time",
+      "To reduce the risk of investment losses",
+      "To cover the shortfall between account value and sum assured"
+    ],
+    correct: 3
+  },
+  {
+    id: 120, chapter: 104,
+    question: "When does the COI deduction cease in SP-IL policies?",
+    options: [
+      "When the account value reaches or exceeds the BSA",
+      "After a specific number of years",
+      "When the investment funds perform well",
+      "When the policyholder requests it to stop"
+    ],
+    correct: 0
+  },
+  {
+    id: 121, chapter: 104,
+    question: "How does the COI deduction change as the account value increases in SP-IL policies?",
+    options: [
+      "It remains constant regardless of the account value",
+      "It increases proportionally with the account value",
+      "It decreases gradually as the account value increases",
+      "It fluctuates based on market conditions"
+    ],
+    correct: 2
+  },
+  {
+    id: 122, chapter: 104,
+    question: "A policyholder's SP-IL policy has an account value of RM9,500 and a basic sum assured (BSA) of RM10,000. The cost of insurance (COI) deduction is RM150. What is the sum at risk (SAR) in this scenario?",
+    options: ["RM500", "RM1,000", "RM9,350", "RM10,000"],
+    correct: 0
+  },
+
+  // CHAPTER 105 — Considerations for Purchasing an ILP (10 Q)
+  {
+    id: 123, chapter: 105,
+    question: "What is one of the benefits of an investment-linked insurance plan?",
+    options: [
+      "Provides only life insurance coverage",
+      "Offers guaranteed investment returns",
+      "Allows policyholders to access pooled and diversified investment funds",
+      "Provides flexibility in changing coverage types"
+    ],
+    correct: 2
+  },
+  {
+    id: 124, chapter: 105,
+    question: "Which component of an investment-linked insurance plan is managed by professional fund managers?",
+    options: ["Policy fees", "Insurance charges", "Sum assured", "Investment funds"],
+    correct: 3
+  },
+  {
+    id: 125, chapter: 105,
+    question: "What is a key advantage of investment-linked policies in terms of expertise?",
+    options: [
+      "Policyholders have full control over investment decisions",
+      "Policyholders have access to professional fund managers' investment expertise",
+      "Policyholders can customize their own investment portfolios",
+      "Policyholders can switch between investment funds at any time"
+    ],
+    correct: 1
+  },
+  {
+    id: 126, chapter: 105,
+    question: "During volatile stock market conditions, the account and maturity values of an investment-linked life insurance policy invested in an equity fund:",
+    options: [
+      "Remain stable",
+      "Experience fluctuations",
+      "Provide guaranteed returns",
+      "Align with traditional whole life products"
+    ],
+    correct: 1
+  },
+  {
+    id: 127, chapter: 105,
+    question: "Which statement is true on the benefit of accessibility to investment-linked policy owners?",
+    options: [
+      "Access to knowledge and advice of fund managers on the recommended shares to purchase",
+      "Access to well-diversified investment funds that are managed by professional and experienced investment managers",
+      "Access to invest directly in the stock market",
+      "Access to expert investment advice and tips"
+    ],
+    correct: 1
+  },
+  {
+    id: 128, chapter: 105,
+    question: "The benefits of an investment-linked policy are:<br><br>I. It provides access to a diversified investment portfolio — thus has better risk characteristics than a non-diversified portfolio.<br>II. It offers flexibility.<br>III. Fixed nominal charges are levied on the policy.<br>IV. The life insurer insulates the policy owner against market risks.",
+    options: ["I and II", "II and IV", "I and III", "I, II, III and IV"],
+    correct: 0
+  },
+  {
+    id: 129, chapter: 105,
+    question: "When an investment-linked policy reaches maturity, the maturity value will be:",
+    options: [
+      "The basic sum assured and the account value",
+      "The account value",
+      "The account value plus terminal/maturity bonus",
+      "The basic sum assured and the account value plus terminal/maturity bonus"
+    ],
+    correct: 1
+  },
+  {
+    id: 130, chapter: 105,
+    question: "What are two similarities between a regular premium investment-linked plan and a whole life participating plan?<br><br>I. Both plans provide lifetime coverage up to a maximum age of 100.<br>II. Both plans allow the addition of riders without additional premium.<br>III. Both are entitled to the same income tax relief treatment for premiums paid.<br>IV. The minimum age for an individual to apply on own life is age 16 for both products.",
+    options: ["I and II", "II and III", "I and III", "All of the above"],
+    correct: 0
+  },
+  {
+    id: 131, chapter: 105,
+    question: "In an investment-linked life insurance policy, the value of units is tied to the performance of:",
+    options: [
+      "Guaranteed cash values",
+      "Traditional whole life products",
+      "The underlying assets",
+      "Fixed insurance charges"
+    ],
+    correct: 2
+  },
+  {
+    id: 132, chapter: 105,
+    question: "The fees associated with an investment-linked life insurance policy, such as policy fee, insurance charge, and fund management fees:",
+    options: [
+      "Are guaranteed and fixed",
+      "Are subject to frequent revisions",
+      "Remain stable throughout the policy term",
+      "Can be adjusted with prior notice to policyholders"
+    ],
+    correct: 3
+  },
+
+  // CHAPTER 106 — Investment Considerations (10 Q)
+  {
+    id: 133, chapter: 106,
+    question: "What are the key considerations before investing in an investment-linked fund?",
+    options: [
+      "Investment objectives, risk tolerance, and taxation treatment",
+      "Accessibility of funds, investment horizon, and risk profiling",
+      "Funds available, investment performance, and risk-return tradeoff",
+      "Income generation, growth objectives, and safety of investments"
+    ],
+    correct: 1
+  },
+  {
+    id: 134, chapter: 106,
+    question: "Which of the following investment objectives focuses on steady income streams?",
+    options: ["Secured", "Income", "Growth", "Security"],
+    correct: 1
+  },
+  {
+    id: 135, chapter: 106,
+    question: "What does risk profiling involve?",
+    options: [
+      "Assessing the client's financial resources",
+      "Determining the investment horizon",
+      "Analyzing the tax implications of investments",
+      "Understanding the client's risk tolerance and preferences"
+    ],
+    correct: 3
+  },
+  {
+    id: 136, chapter: 106,
+    question: "How does the investment horizon influence the level of risk an investor should be willing to accept?",
+    options: [
+      "Longer investment horizons allow for greater risk-taking",
+      "Shorter investment horizons require higher risk tolerance",
+      "Investment horizon has no impact on risk tolerance",
+      "Risk tolerance is solely determined by the client's age"
+    ],
+    correct: 0
+  },
+  {
+    id: 137, chapter: 106,
+    question: "What is the purpose of conducting cash flow and net worth analysis?",
+    options: [
+      "To evaluate the performance of investment-linked funds",
+      "To determine the accessibility of funds in investment-linked insurance",
+      "To assess the client's financial situation and available funds for investing",
+      "To understand the tax implications associated with different investment options"
+    ],
+    correct: 2
+  },
+  {
+    id: 138, chapter: 106,
+    question: "How does taxation treatment affect the overall returns on an investment?",
+    options: [
+      "It has no impact on investment returns",
+      "It can significantly reduce investment returns",
+      "It increases investment returns",
+      "It only affects specific types of investments"
+    ],
+    correct: 1
+  },
+  {
+    id: 139, chapter: 106,
+    question: "What is the relationship between risk and potential return in the risk-return tradeoff?",
+    options: [
+      "Higher risk is associated with higher potential return",
+      "Higher risk leads to lower potential return",
+      "Risk and potential return are unrelated",
+      "Lower risk is associated with higher potential return"
+    ],
+    correct: 0
+  },
+  {
+    id: 140, chapter: 106,
+    question: "What are the main risk profiles corresponding to different investing styles?",
+    options: [
+      "Very Conservative, Conservative, Balanced, Aggressive and Very Aggressive",
+      "Conservative, Aggressive, and Very Aggressive",
+      "Conservative, Balanced, and Very Aggressive",
+      "Very Conservative, Conservative, and Balanced"
+    ],
+    correct: 3
+  },
+  {
+    id: 141, chapter: 106,
+    question: "Which of the following factors are important to consider when conducting a risk profiling exercise for investment-linked plans?<br><br>I. Age, income, and financial stability<br>II. Family situation and current financial position<br>III. Investment experience and knowledge<br>IV. Risk tolerance and investment disposition",
+    options: ["I and II", "I and III", "I, II and III", "All of the above"],
+    correct: 0
+  },
+  {
+    id: 142, chapter: 106,
+    question: "Why is understanding an individual's investment horizon important?",
+    options: [
+      "It determines the accessibility of funds in investment-linked insurance",
+      "It helps determine the level of risk an investor can comfortably assume",
+      "It impacts the taxation treatment of investments",
+      "It influences the historical performance of investment-linked funds"
+    ],
+    correct: 1
+  },
+
+  // CHAPTER 107 — Types of Investment Vehicles & Potential Risks (9 Q)
+  {
+    id: 143, chapter: 107,
+    question: "Why do guidelines require insurance companies to invest funds from an investment-linked insurance policy according to the objectives in the Fund Fact Sheet?",
+    options: [
+      "To provide the insurer flexibility in managing the funds across multiple products",
+      "To ensure the investments align with policyholders' expectations",
+      "To allow the insurer to maximize returns for policyholders over time",
+      "To reduce administrative costs for the insurer"
+    ],
+    correct: 1
+  },
+  {
+    id: 144, chapter: 107,
+    question: "What action must an insurance company take if it cannot achieve the minimum required fund size during the initial offer period?",
+    options: [
+      "Continue the offer period until the minimum fund size is met",
+      "Refund all policyholder payments with any interest or investment profits earned",
+      "Adjust the fund's investment strategy to attract more investors",
+      "Reduce the minimum fund size to avoid refunding policyholder payments"
+    ],
+    correct: 1
+  },
+  {
+    id: 145, chapter: 107,
+    question: "Compared to government bond funds, corporate bond funds have:",
+    options: [
+      "Lower yields and lower risks",
+      "Higher yields and higher risks",
+      "More or less similar yield and risk ratios",
+      "A longer tenure"
+    ],
+    correct: 1
+  },
+  {
+    id: 146, chapter: 107,
+    question: "Which of the following is a primary advantage of investing in money market instruments?",
+    options: [
+      "Protection against inflation risk",
+      "High potential for capital appreciation",
+      "Higher returns compared to equities and fixed income",
+      "Stability with minimal fluctuations in value"
+    ],
+    correct: 3
+  },
+  {
+    id: 147, chapter: 107,
+    question: "Which of the following is a key benefit of investing in Real Estate Investment Trusts (REITs)?",
+    options: [
+      "High capital growth through reinvestment of income",
+      "Diversification through exposure to the property market",
+      "Immunity from interest rate fluctuations",
+      "Minimal management fees compared to other investments"
+    ],
+    correct: 1
+  },
+  {
+    id: 148, chapter: 107,
+    question: "Which of the following accurately describes the similarities and differences between unit trusts and single premium investment-linked plans?<br><br>I. Both unit trusts and single premium investment-linked plans have a similar investment approach.<br>II. Unit trusts do not include life insurance protection, whereas single premium investment-linked plans do.<br>III. Only single premium investment-linked plans impose insurance costs and policy fees due to the life protection element.<br>IV. A trustee is required for unit trusts, but this is not mandatory for single premium investment-linked plans.",
+    options: ["I, II and IV", "I, II and III", "II, III and IV", "I and III"],
+    correct: 2
+  },
+  {
+    id: 149, chapter: 107,
+    question: "What are the advantages of investing in equities?<br><br>I. Potential to achieve capital growth through capital appreciation and steady stream of dividend income.<br>II. Provide diversification benefits as policyholders' monies are invested in a wide range of companies and sectors.<br>III. Provide liquidity to investors as investors can quickly convert their shares into cash if needed.<br>IV. Provide geographical exposure thus able to average market risk.",
+    options: ["I and II", "I, II and III", "III and IV", "II, III and IV"],
+    correct: 1
+  },
+  {
+    id: 150, chapter: 107,
+    question: "What are the characteristics of fixed-income securities?<br><br>I. They comprise of government and corporate bonds.<br>II. They provide a regular stream of interest income.<br>III. They have lower risk compared to equities.<br>IV. The interest payments are usually more predictable than dividend income from equities.",
+    options: ["I and II", "II and III", "II, III and IV", "All of the above"],
+    correct: 3
+  },
+  {
+    id: 151, chapter: 107,
+    question: "Please rank the sequence of the risk and return of the following investment vehicles from lower to higher.",
+    options: [
+      "Money Market Instruments, Fixed-Income Securities, Equities",
+      "Equities, Fixed-Income Securities, Money Market Instruments",
+      "Money Market Instruments, Equities and Fixed-Income Securities",
+      "Fixed-Income Securities, Money Market Instruments, Equities"
+    ],
+    correct: 0
+  },
+
+  // CHAPTER 108 — Common Types of ILFs, Potential Risks & Fund Management (9 Q)
+  {
+    id: 152, chapter: 108,
+    question: "Choose the correct statement(s):<br><br>I. Investment-linked plans offer various types of funds, such as equity funds, fixed income funds, balanced funds, and Shariah-compliant funds, among others.<br>II. Policy owners can choose to invest in one or more funds based on their investment objectives, risk tolerance, and financial goals.<br>III. The value of an investment-linked plan is directly linked to the performance of the funds selected by the policy owner.<br>IV. The insurers assume the investment risk, and the returns from the investment are not guaranteed.",
+    options: ["II and III", "III and IV", "I, II and III", "II, III and IV"],
+    correct: 2
+  },
+  {
+    id: 153, chapter: 108,
+    question: "Which of the following funds is considered the lowest-risk investment option?",
+    options: ["Equity funds", "Fixed income funds", "Balanced funds", "Specialised funds"],
+    correct: 1
+  },
+  {
+    id: 154, chapter: 108,
+    question: "What is the primary characteristic of index funds?",
+    options: [
+      "They offer the potential for higher returns",
+      "They invest primarily in real estate properties",
+      "They require active management by a fund manager",
+      "They seek to replicate the performance of a specific market index"
+    ],
+    correct: 3
+  },
+  {
+    id: 155, chapter: 108,
+    question: "Which type of fund restricts investments to those that align with specific ethical and religious guidelines?",
+    options: ["Equity funds", "Fixed income funds", "Shariah-compliant funds", "Global funds"],
+    correct: 2
+  },
+  {
+    id: 156, chapter: 108,
+    question: "Which fund category is suitable for investors who prioritize capital preservation and income generation?",
+    options: ["Equity funds", "Fixed income funds", "Shariah-compliant funds", "Balanced funds"],
+    correct: 1
+  },
+  {
+    id: 157, chapter: 108,
+    question: "Which of the following statements is true regarding property funds and REITs?<br><br>I. Property funds invest in income-generating real estate properties.<br>II. Property funds invest in a wider range of property-related assets.<br>III. REITs are publicly traded on stock exchanges.<br>IV. REITs distribute 100% of their taxable income to investors in the form of dividends.",
+    options: ["I and IV", "II only", "II and III", "I, III and IV"],
+    correct: 2
+  },
+  {
+    id: 158, chapter: 108,
+    question: "Balanced funds aim to provide a balance between:",
+    options: [
+      "Capital growth and income generation",
+      "High-risk and speculative investments",
+      "Cash and liquid assets",
+      "Short-term gains and high liquidity"
+    ],
+    correct: 0
+  },
+  {
+    id: 159, chapter: 108,
+    question: "Which of the following is NOT a risk factor typically associated with investment-linked funds?",
+    options: [
+      "Market fluctuations",
+      "Liquidity limitations",
+      "Credit defaults",
+      "Potential for higher returns"
+    ],
+    correct: 3
+  },
+  {
+    id: 160, chapter: 108,
+    question: "Which statements describe global funds correctly?<br><br>I. Invest in securities around the world, including developed and emerging markets.<br>II. Invest in a variety of asset classes, including equities, bonds, and alternative investments such as real estate or commodities.<br>III. Carry risks associated with investing in different currencies, political instability in some regions, and other macroeconomic factors.<br>IV. Provide averagely higher rate of return than all other funds.",
+    options: ["II and IV", "III and IV", "II, III and IV", "I, II and III"],
+    correct: 3
+  },
+
+  // CHAPTER 109 — Pertinent Guidelines on Investment-Linked Business (9 Q)
+  {
+    id: 161, chapter: 109,
+    question: "Why is it important for agents and sales intermediaries to pass the Certificate Examination in Investment-Linked Life Insurance (CEILLI) before they can market investment-linked products?",
+    options: [
+      "To ensure they can be productive in their sales career",
+      "To increase their opportunity to upsell and cross-sell more products",
+      "To be equipped with knowledge of ethical sales practices and needs analysis",
+      "To ensure that only licensed persons with proper training can market these products"
+    ],
+    correct: 3
+  },
+  {
+    id: 162, chapter: 109,
+    question: "What is the objective of the Investment-Linked Guidelines issued by Bank Negara Malaysia?<br><br>I. To promote and maintain high corporate governance and professionalism.<br>II. To ensure professional and proper conduct in sales and marketing.<br>III. To maximize returns for policy owners/takaful participants.<br>IV. To enhance product transparency and disclosure to protect the interests of policy owners/takaful participants.",
+    options: ["I and II", "I, II and III", "I, II and IV", "II, III and IV"],
+    correct: 2
+  },
+  {
+    id: 163, chapter: 109,
+    question: "According to the Investment-Linked Guidelines, Bank Negara Malaysia, what are the objectives of the Minimum Allocation Rates (MAR) implementation?<br><br>I. To protect the account value of policy owners/takaful participants.<br>II. To prescribe the standards for sustainability tests to ensure proper management of long-term persistency of investment-linked policies.<br>III. To enhance the product illustration format.<br>IV. To optimise return for policy owners/takaful participants and profit for insurers.",
+    options: ["II, III and IV", "I, III and IV", "I, II and IV", "I, II and III"],
+    correct: 3
+  },
+  {
+    id: 164, chapter: 109,
+    question: "According to the Investment-Linked Guidelines, Bank Negara Malaysia, insurers offering investment-linked products must disclose information about the product's design, including:<br><br>I. The name of the product and funds must reflect the underlying investment strategy.<br>II. Any options and guarantees provided for the product.<br>III. Whether the product is whole life or term life insurance.<br>IV. The commission structure for agents selling the product.",
+    options: ["I and III", "I and II", "I, II and III", "All of the above"],
+    correct: 1
+  },
+  {
+    id: 165, chapter: 109,
+    question: "Insurers are required to provide policy owners with appropriate advice on managing the extension of coverage. What consent is required before deducting any charges for riders during a premium or takaful contribution holiday?",
+    options: ["Verbal consent", "Written consent", "No consent is required", "Consent from the agent"],
+    correct: 1
+  },
+  {
+    id: 166, chapter: 109,
+    question: "Insurers must disclose all fees and charges in sales and marketing materials and investment-linked policy documents. What is the duration of notice that must be given before revising existing fees and charges?",
+    options: ["One month", "Two months", "Three months", "Six months"],
+    correct: 2
+  },
+  {
+    id: 167, chapter: 109,
+    question: "Insurers must only charge expenses that are specifically incurred for the management of an investment-linked fund including:<br><br>I. Commissions, taxes, fees for auditors and valuers.<br>II. Custodian fees and hedging costs.<br>III. General overheads.<br>IV. Investment in systems to enhance company operations.",
+    options: ["I and II", "III and IV", "I, II and III", "All the above"],
+    correct: 0
+  },
+  {
+    id: 168, chapter: 109,
+    question: "How often must a licensed takaful operator value the assets of an investment-linked takaful fund?",
+    options: ["Weekly", "Monthly", "Annually", "Daily"],
+    correct: 3
+  },
+  {
+    id: 169, chapter: 109,
+    question: "What must an insurer consider when providing seed money to assist in the start-up of an investment-linked fund?",
+    options: [
+      "The insurer must ensure there is an exit strategy to manage its risk exposure.",
+      "The insurer must provide liquidity for policyholders to withdraw funds.",
+      "The insurer must limit investment in foreign assets.",
+      "The insurer must ensure the fund maintains sufficient liquidity to support policyholder transactions."
+    ],
+    correct: 0
   }
 
 ]; // end quizData

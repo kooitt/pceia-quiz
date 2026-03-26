@@ -301,6 +301,25 @@ input  { font-family: inherit; }
   margin-bottom: 12px;
 }
 
+.exam-section-header {
+  width:       100%;
+  font-size:   0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color:       var(--muted);
+  padding:     6px 2px 2px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2px;
+}
+.exam-section-header:not(:first-child) { margin-top: 8px; }
+
+.exam-quick {
+  background: transparent;
+  border-color: var(--border);
+}
+.exam-quick:hover { border-color: var(--accent); color: var(--accent); }
+
 .cat-chip {
   display:     inline-flex;
   align-items: center;

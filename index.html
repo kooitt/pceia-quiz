@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PCEIA Insurance Quiz</title>
+  <title>PCEIA & CEILLI Insurance Quiz</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -18,12 +18,12 @@
 
     <div class="start-header">
       <div class="start-logo">📋</div>
-      <h1>PCEIA Insurance Quiz</h1>
-      <p class="subtitle">Pre-Contract Examination for Insurance Agents — Practice Questions</p>
+      <h1>Insurance Quiz</h1>
+      <p class="subtitle">PCEIA &amp; CEILLI — Practice Questions for Insurance Agents</p>
 
       <div class="stats-row">
-        <span class="stat-chip"><strong>87</strong> Questions</span>
-        <span class="stat-chip"><strong>12</strong> Chapters</span>
+        <span class="stat-chip"><strong id="total-q-stat">169</strong> Questions</span>
+        <span class="stat-chip"><strong>21</strong> Chapters</span>
         <span class="stat-chip"><strong>75%</strong> Pass Mark</span>
         <span class="stat-chip highscore-chip">🏆 Best: <strong class="high-score-value">0%</strong></span>
       </div>
@@ -80,6 +80,8 @@
       <div class="cat-header">
         <h3>📚 Select Chapters</h3>
         <div class="cat-quick-btns">
+          <button class="btn-ghost exam-quick" id="btn-select-pceia">PCEIA</button>
+          <button class="btn-ghost exam-quick" id="btn-select-ceilli">CEILLI</button>
           <button class="btn-ghost" id="btn-select-all">All</button>
           <button class="btn-ghost" id="btn-select-none">None</button>
         </div>
@@ -89,7 +91,7 @@
         <!-- Populated by JS -->
       </div>
 
-      <p class="selected-info"><span id="selected-count">87 questions selected</span></p>
+      <p class="selected-info"><span id="selected-count">169 questions selected</span></p>
     </div>
 
     <button class="btn-primary" id="btn-start">Start Quiz →</button>

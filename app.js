@@ -1,5 +1,5 @@
 // =============================================================================
-// PCEIA Quiz App — Main Application Logic
+// PCEIA & CEILLI Quiz App — Main Application Logic
 // =============================================================================
 
 const PASS_THRESHOLD = 0.75;  // 75% to pass (standard for PCEIA)
@@ -75,25 +75,36 @@ function applySettingsToUI() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Category checkboxes
+// Category checkboxes (grouped by exam)
 // ─────────────────────────────────────────────────────────────────────────────
 function renderCategoryCheckboxes() {
   const container = $('category-list');
   container.innerHTML = '';
 
-  CATEGORIES.forEach(cat => {
-    const count = quizData.filter(q => q.chapter === cat.id).length;
-    const isChecked = state.settings.selectedChapters.length === 0 ||
-                      state.settings.selectedChapters.includes(cat.id);
+  ['pceia', 'ceilli'].forEach(source => {
+    // Section divider
+    const divider = document.createElement('div');
+    divider.className = 'exam-section-header';
+    divider.textContent = source === 'pceia'
+      ? '📋 PCEIA — Pre-Contract Examination for Insurance Agents'
+      : '📈 CEILLI — Certificate Examination in Investment-Linked Life Insurance';
+    container.appendChild(divider);
 
-    const label = document.createElement('label');
-    label.className = 'cat-chip' + (isChecked ? ' active' : '');
-    label.innerHTML = `
-      <input type="checkbox" value="${cat.id}" ${isChecked ? 'checked' : ''}>
-      <span>${cat.label}</span>
-      <em>${count}Q</em>`;
-    label.querySelector('input').addEventListener('change', onCategoryChange);
-    container.appendChild(label);
+    const cats = CATEGORIES.filter(c => c.source === source);
+    cats.forEach(cat => {
+      const count = quizData.filter(q => q.chapter === cat.id).length;
+      const isChecked = state.settings.selectedChapters.length === 0 ||
+                        state.settings.selectedChapters.includes(cat.id);
+
+      const label = document.createElement('label');
+      label.className = 'cat-chip' + (isChecked ? ' active' : '');
+      label.innerHTML = `
+        <input type="checkbox" value="${cat.id}" ${isChecked ? 'checked' : ''}>
+        <span>${cat.label}</span>
+        <em>${count}Q</em>`;
+      label.querySelector('input').addEventListener('change', onCategoryChange);
+      container.appendChild(label);
+    });
   });
 
   updateSelectedCount();
@@ -131,6 +142,20 @@ function selectNone() {
   saveSettings();
 }
 
+function selectExam(source) {
+  const ids = CATEGORIES.filter(c => c.source === source).map(c => c.id);
+  document.querySelectorAll('#category-list input').forEach(cb => {
+    cb.checked = ids.includes(parseInt(cb.value));
+  });
+  document.querySelectorAll('.cat-chip').forEach(chip => {
+    const v = parseInt(chip.querySelector('input').value);
+    chip.classList.toggle('active', ids.includes(v));
+  });
+  state.settings.selectedChapters = ids;
+  updateSelectedCount();
+  saveSettings();
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Question pool
 // ─────────────────────────────────────────────────────────────────────────────
@@ -157,6 +182,8 @@ function attachStartListeners() {
   $('btn-start').addEventListener('click', startQuiz);
   $('btn-select-all').addEventListener('click', selectAll);
   $('btn-select-none').addEventListener('click', selectNone);
+  $('btn-select-pceia').addEventListener('click', () => selectExam('pceia'));
+  $('btn-select-ceilli').addEventListener('click', () => selectExam('ceilli'));
 
   $('toggle-shuffle').addEventListener('change', e => {
     state.settings.shuffle = e.target.checked;
