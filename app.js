@@ -5,6 +5,7 @@
 const PASS_THRESHOLD = 0.75;  // 75% to pass (standard for PCEIA)
 const HIGH_SCORE_KEY  = 'pceia_highscore';
 const SETTINGS_KEY    = 'pceia_settings';
+const SESSION_KEY     = 'quiz_session';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // State
@@ -46,6 +47,7 @@ function init() {
   loadSettings();
   renderCategoryCheckboxes();
   renderHighScore();
+  renderResumeUI();
   attachStartListeners();
   showScreen('start-screen');
 }
@@ -63,6 +65,78 @@ function loadSettings() {
 
 function saveSettings() {
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(state.settings));
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Session persistence (resume where you left off)
+// ─────────────────────────────────────────────────────────────────────────────
+function saveSession() {
+  if (!state.quizStarted || state.questions.length === 0) return;
+  const session = {
+    questionIds: state.questions.map(q => q.id),
+    current:     state.current,
+    score:       state.score,
+    answerMap:   state.answerMap,
+    savedAt:     Date.now()
+  };
+  localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+}
+
+function clearSession() {
+  localStorage.removeItem(SESSION_KEY);
+}
+
+function loadSession() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(SESSION_KEY));
+    if (!saved || !Array.isArray(saved.questionIds) || saved.questionIds.length === 0) return null;
+    const questions = saved.questionIds
+      .map(id => quizData.find(q => q.id === id))
+      .filter(Boolean);
+    if (questions.length === 0) return null;
+    return { ...saved, questions };
+  } catch (_) { return null; }
+}
+
+function renderResumeUI() {
+  const session = loadSession();
+  const card = $('resume-card');
+  if (!session) { card.classList.add('hidden'); return; }
+
+  const answered = Object.keys(session.answerMap).length;
+  const total    = session.questions.length;
+  const pct      = answered > 0 ? Math.round((session.score / answered) * 100) : 0;
+
+  $('resume-q-progress').textContent = `Question ${Math.min(session.current + 1, total)} of ${total}`;
+  $('resume-score').textContent      = `Score ${session.score} / ${answered} (${pct}%)`;
+  $('resume-date').textContent       = 'Saved ' + timeAgo(session.savedAt);
+  card.classList.remove('hidden');
+
+  $('btn-resume').onclick  = () => resumeSession(session);
+  $('btn-discard').onclick = () => { clearSession(); card.classList.add('hidden'); };
+}
+
+function resumeSession(session) {
+  state.questions      = session.questions;
+  state.current        = session.current;
+  state.score          = session.score;
+  state.answerMap      = session.answerMap;
+  state.answers        = [];
+  state.selectedOption = null;
+  state.answered       = false;
+  state.quizStarted    = true;
+  showScreen('quiz-screen');
+  renderQuestion();
+}
+
+function timeAgo(ts) {
+  const m = Math.floor((Date.now() - ts) / 60000);
+  if (m < 1)  return 'just now';
+  if (m < 60) return `${m} minute${m > 1 ? 's' : ''} ago`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h} hour${h > 1 ? 's' : ''} ago`;
+  const d = Math.floor(h / 24);
+  return `${d} day${d > 1 ? 's' : ''} ago`;
 }
 
 function applySettingsToUI() {
@@ -215,6 +289,8 @@ function startQuiz() {
     return;
   }
 
+  clearSession(); // discard any previous saved session
+
   state.questions      = pool;
   state.current        = 0;
   state.score          = 0;
@@ -350,6 +426,8 @@ function submitAnswer() {
 
   stopTimer();
   $('btn-next').disabled = false;
+
+  saveSession(); // persist progress after every answer
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -387,11 +465,11 @@ function prevQuestion() {
 // Exit quiz → return to home
 // ─────────────────────────────────────────────────────────────────────────────
 function exitQuiz() {
-  if (confirm('Exit quiz? Your current progress will be lost.')) {
-    stopTimer();
-    showScreen('start-screen');
-    renderHighScore();
-  }
+  stopTimer();
+  saveSession();
+  showScreen('start-screen');
+  renderHighScore();
+  renderResumeUI(); // immediately show the resume card
 }
 
 function advance() {
@@ -470,6 +548,7 @@ function updateTimerUI() {
 // ─────────────────────────────────────────────────────────────────────────────
 function showResults() {
   stopTimer();
+  clearSession(); // quiz complete — no need to keep the session
   showScreen('results-screen');
 
   // Build ordered answers array from answerMap for review screen
@@ -654,6 +733,9 @@ document.addEventListener('DOMContentLoaded', () => {
   $('btn-next').addEventListener('click', nextQuestion);
   $('btn-prev').addEventListener('click', prevQuestion);
   $('btn-exit').addEventListener('click', exitQuiz);
+
+  // Save progress if the tab is closed mid-quiz
+  window.addEventListener('beforeunload', () => { if (state.quizStarted) saveSession(); });
 
   // Keyboard support
   document.addEventListener('keydown', e => {

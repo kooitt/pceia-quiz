@@ -352,6 +352,83 @@ input  { font-family: inherit; }
 
 #selected-count { color: var(--primary); font-weight: 600; }
 
+/* Resume card */
+.resume-card {
+  display:       flex;
+  align-items:   center;
+  gap:           16px;
+  background:    linear-gradient(135deg, rgba(59,130,246,0.08), rgba(139,92,246,0.08));
+  border:        1.5px solid rgba(59,130,246,0.35);
+  border-radius: var(--radius);
+  padding:       18px 20px;
+  margin-bottom: 12px;
+  animation:     fadeIn 0.3s ease;
+}
+.resume-card.hidden { display: none; }
+
+.resume-icon {
+  font-size:  1.6rem;
+  flex-shrink: 0;
+}
+
+.resume-body {
+  flex:      1;
+  min-width: 0;
+}
+.resume-title {
+  font-size:   0.92rem;
+  font-weight: 700;
+  color:       var(--text);
+  margin-bottom: 4px;
+}
+.resume-meta {
+  display:   flex;
+  gap:       6px;
+  font-size: 0.8rem;
+  color:     var(--primary);
+  font-weight: 600;
+  flex-wrap: wrap;
+}
+.resume-dot { color: var(--muted); }
+.resume-date {
+  font-size: 0.73rem;
+  color:     var(--muted);
+  margin-top: 3px;
+}
+
+.resume-actions {
+  display:     flex;
+  flex-direction: column;
+  gap:         8px;
+  flex-shrink: 0;
+}
+.btn-resume-continue {
+  background:    linear-gradient(135deg, var(--primary), var(--accent));
+  color:         #fff;
+  border:        none;
+  border-radius: 8px;
+  padding:       8px 18px;
+  font-size:     0.82rem;
+  font-weight:   700;
+  white-space:   nowrap;
+  transition:    var(--trans);
+  box-shadow:    0 2px 10px rgba(59,130,246,0.3);
+}
+.btn-resume-continue:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(59,130,246,0.4); }
+.btn-resume-discard {
+  background:    transparent;
+  border:        1px solid var(--border);
+  color:         var(--muted);
+  border-radius: 8px;
+  padding:       6px 18px;
+  font-size:     0.78rem;
+  font-weight:   500;
+  transition:    var(--trans);
+}
+.btn-resume-discard:hover { border-color: var(--danger); color: var(--danger); }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
 /* Start button */
 .btn-primary {
   display:      block;
@@ -1073,6 +1150,9 @@ input  { font-family: inherit; }
   .timer-display    { font-size: 0.9rem; }
   .cat-chip span    { font-size: 0.72rem; }
   .review-nav       { flex-wrap: wrap; }
+  .resume-card      { flex-wrap: wrap; }
+  .resume-actions   { flex-direction: row; width: 100%; }
+  .btn-resume-continue, .btn-resume-discard { flex: 1; text-align: center; }
 }
 
 /* =============================================================================

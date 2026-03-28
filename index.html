@@ -94,7 +94,25 @@
       <p class="selected-info"><span id="selected-count">169 questions selected</span></p>
     </div>
 
-    <button class="btn-primary" id="btn-start">Start Quiz →</button>
+    <!-- Resume card — shown by JS only when a saved session exists -->
+    <div id="resume-card" class="resume-card hidden">
+      <div class="resume-icon">📌</div>
+      <div class="resume-body">
+        <div class="resume-title">You have an unfinished quiz</div>
+        <div class="resume-meta">
+          <span id="resume-q-progress">Question 1 of 87</span>
+          <span class="resume-dot">·</span>
+          <span id="resume-score">Score 0 / 0 (0%)</span>
+        </div>
+        <div class="resume-date" id="resume-date">Saved just now</div>
+      </div>
+      <div class="resume-actions">
+        <button class="btn-resume-continue" id="btn-resume">Continue →</button>
+        <button class="btn-resume-discard"  id="btn-discard">Discard</button>
+      </div>
+    </div>
+
+    <button class="btn-primary" id="btn-start">Start New Quiz →</button>
 
   </div><!-- /start-screen -->
 
